@@ -2,12 +2,31 @@ import React, {Component} from 'react'
 
 
 export default class CommentBox extends Component {
-    render(){
+    constructor() {
+        super();
+
+        this.state = {comment: ''};
+    }
+
+    handleChange(event) {
+        this.setState({comment: event.target.value});
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+
+        this.setState({comment: ''});
+    }
+
+    render() {
         return (
-            <div className="comment-box">
-                <textarea cols="30" rows="10"/>
-                <button>Submit Comment</button>
-            </div>
+            <form className="comment-box" onSubmit={this.handleSubmit.bind(this)}>
+                <textarea
+                    onChange={this.handleChange.bind(this)}
+                    value={this.state.comment}
+                />
+                <button action="submit">Submit Comment</button>
+            </form>
         )
     }
 }
